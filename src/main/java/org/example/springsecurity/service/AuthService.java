@@ -1,18 +1,19 @@
-package org.example.springsecurity.security.service;
+package org.example.springsecurity.service;
 
 
-import com.example.auth.dto.request.LoginRequest;
-import com.example.auth.dto.request.RefreshTokenRequest;
-import com.example.auth.dto.request.RegisterRequest;
-import com.example.auth.dto.response.AuthResponse;
-import com.example.auth.entity.*;
-import com.example.auth.exception.AuthException;
-import com.example.auth.repository.RoleRepository;
-import com.example.auth.repository.TokenBlacklistRepository;
-import com.example.auth.repository.UserRepository;
-import com.example.auth.security.jwt.JwtService;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.springsecurity.dto.request.LoginRequest;
+import org.example.springsecurity.dto.request.RefreshTokenRequest;
+import org.example.springsecurity.dto.request.RegisterRequest;
+import org.example.springsecurity.dto.response.AuthResponse;
+import org.example.springsecurity.entity.*;
+import org.example.springsecurity.exception.AuthException;
+import org.example.springsecurity.repository.RoleRepository;
+import org.example.springsecurity.repository.TokenBlacklistRepository;
+import org.example.springsecurity.repository.UserRepository;
+import org.example.springsecurity.security.jwt.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,18 +22,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class AuthService {
 
-    private final UserRepository            userRepository;
-    private final RoleRepository            roleRepository;
-    private final TokenBlacklistRepository  blacklistRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
+    private final TokenBlacklistRepository blacklistRepository;
     private final PasswordEncoder           passwordEncoder;
-    private final JwtService                jwtService;
+    private final JwtService jwtService;
     private final RefreshTokenService       refreshTokenService;
     private final AuthenticationManager     authenticationManager;
 

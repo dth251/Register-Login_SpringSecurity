@@ -1,12 +1,13 @@
-package org.example.springsecurity.security.service;
+package org.example.springsecurity.service;
 
 
-import com.example.auth.entity.RefreshToken;
-import com.example.auth.entity.User;
-import com.example.auth.exception.TokenException;
-import com.example.auth.repository.RefreshTokenRepository;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.example.springsecurity.entity.RefreshToken;
+import org.example.springsecurity.entity.User;
+import org.example.springsecurity.exception.TokenException;
+import org.example.springsecurity.repository.RefreshTokenRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

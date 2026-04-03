@@ -1,7 +1,5 @@
 package org.example.springsecurity.config;
 
-
-
 import lombok.RequiredArgsConstructor;
 import org.example.springsecurity.security.jwt.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
@@ -23,14 +21,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
 import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity                   // Bật @PreAuthorize, @PostAuthorize
 @RequiredArgsConstructor
-public class SecurintyCofig {
+public class SecurityCofig {
 
     private final JwtAuthenticationFilter jwtAuthFilter;
     private final UserDetailsService userDetailsService;
@@ -80,8 +77,7 @@ public class SecurintyCofig {
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setUserDetailsService(userDetailsService);
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
