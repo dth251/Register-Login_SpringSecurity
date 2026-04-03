@@ -25,7 +25,7 @@ import java.util.List;
 
 @Configuration
 @EnableWebSecurity
-@EnableMethodSecurity                   // Bật @PreAuthorize, @PostAuthorize
+@EnableMethodSecurity
 @RequiredArgsConstructor
 public class SecurityCofig {
 

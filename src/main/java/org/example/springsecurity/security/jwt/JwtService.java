@@ -36,7 +36,7 @@ public class JwtService {
 
     private final TokenBlacklistRepository blacklistRepository;
 
-    // ========== Generate Token ==========
+    // Generate Token
 
     public String generateAccessToken(UserDetails userDetails) {
         // Nhúng danh sách roles vào claim "roles" (List<String>)
@@ -64,7 +64,7 @@ public class JwtService {
                 .compact();
     }
 
-    // ========== Validate Token ==========
+    //  Validate Token
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         try {
@@ -86,7 +86,7 @@ public class JwtService {
         return extractExpiration(token).before(new Date());
     }
 
-    // ========== Extract Claims ==========
+    //  Extract Claims
 
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);

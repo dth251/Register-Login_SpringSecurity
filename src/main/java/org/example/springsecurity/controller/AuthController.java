@@ -20,10 +20,7 @@ public class AuthController {
 
     private final AuthService authService;
 
-    /**
-     * POST /api/auth/register
-     * Đăng ký tài khoản mới (role mặc định: USER)
-     */
+
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<AuthResponse>> register(
             @Valid @RequestBody RegisterRequest request) {
@@ -33,10 +30,7 @@ public class AuthController {
                 .body(ApiResponse.success("Đăng ký thành công", response));
     }
 
-    /**
-     * POST /api/auth/login
-     * Đăng nhập — trả về access token + refresh token
-     */
+
     @PostMapping("/login")
     public ResponseEntity<ApiResponse<AuthResponse>> login(
             @Valid @RequestBody LoginRequest request) {
@@ -44,10 +38,7 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.success("Đăng nhập thành công", response));
     }
 
-    /**
-     * POST /api/auth/refresh
-     * Lấy access token mới bằng refresh token (Refresh Token Rotation)
-     */
+
     @PostMapping("/refresh")
     public ResponseEntity<ApiResponse<AuthResponse>> refreshToken(
             @Valid @RequestBody RefreshTokenRequest request) {
@@ -55,10 +46,7 @@ public class AuthController {
         return ResponseEntity.ok(ApiResponse.success("Refresh token thành công", response));
     }
 
-    /**
-     * POST /api/auth/logout
-     * Đăng xuất — blacklist access token + revoke refresh tokens
-     */
+
     @PostMapping("/logout")
     public ResponseEntity<ApiResponse<Void>> logout(
             @RequestHeader("Authorization") String authHeader) {

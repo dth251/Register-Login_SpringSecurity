@@ -16,16 +16,13 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserController {
 
-    /**
-     * GET /api/user/profile
-     * Truy cập được bởi ROLE_USER và ROLE_ADMIN
-     */
+
     @GetMapping("/api/user/profile")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<ApiResponse<Map<String, Object>>> getProfile(
             @AuthenticationPrincipal User user) {
 
-        // Lấy danh sách tên role từ Set<Role>
+
         var roleNames = user.getRoles().stream()
                 .map(r -> r.getName().name())
                 .collect(Collectors.toSet());
@@ -40,36 +37,25 @@ public class UserController {
         return ResponseEntity.ok(ApiResponse.success("Lấy thông tin thành công", profile));
     }
 
-    /**
-     * GET /api/user/dashboard
-     * Endpoint dành cho USER (cả ADMIN cũng có thể truy cập)
-     */
+
     @GetMapping("/api/user/dashboard")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     public ResponseEntity<ApiResponse<String>> userDashboard(
             @AuthenticationPrincipal User user) {
-        String msg = "Xin chào " + user.getUsername()
-                + "! Roles của bạn: " + user.getRoleNames();
+        String msg = "Xin chào " + user.getUsername();
         return ResponseEntity.ok(ApiResponse.success(msg));
     }
 
-    /**
-     * GET /api/admin/dashboard
-     * CHỈ ADMIN mới truy cập được
-     */
+
     @GetMapping("/api/admin/dashboard")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<String>> adminDashboard(
             @AuthenticationPrincipal User user) {
-        String msg = "Xin chào Admin " + user.getUsername()
-                + "! Roles: " + user.getRoleNames();
+        String msg = "Xin chào Admin " + user.getUsername();
         return ResponseEntity.ok(ApiResponse.success(msg));
     }
 
-    /**
-     * GET /api/admin/users
-     * Lấy danh sách users — chỉ ADMIN
-     */
+
     @GetMapping("/api/admin/users")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<ApiResponse<String>> getAllUsers() {

@@ -36,7 +36,7 @@ public class AuthService {
     private final RefreshTokenService       refreshTokenService;
     private final AuthenticationManager     authenticationManager;
 
-    // ===================== REGISTER =====================
+    //  REGISTER
     @Transactional
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
@@ -63,7 +63,7 @@ public class AuthService {
         return buildAuthResponse(user);
     }
 
-    // ===================== LOGIN =====================
+    // LOGIN
     @Transactional
     public AuthResponse login(LoginRequest request) {
         try {
@@ -84,7 +84,7 @@ public class AuthService {
         return buildAuthResponse(user);
     }
 
-    // ===================== REFRESH TOKEN =====================
+    // REFRESH TOKEN
     @Transactional
     public AuthResponse refreshToken(RefreshTokenRequest request) {
         RefreshToken refreshToken = refreshTokenService.verifyRefreshToken(request.getRefreshToken());
@@ -98,7 +98,7 @@ public class AuthService {
         return buildAuthResponseWithTokens(user, newAccessToken, newRefreshToken.getToken());
     }
 
-    // ===================== LOGOUT =====================
+    // LOGOUT
     @Transactional
     public void logout(String authHeader) {
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -119,7 +119,7 @@ public class AuthService {
         log.info("User đăng xuất thành công: {}", username);
     }
 
-    // ===================== HELPERS =====================
+    //  HELPERS
 
     private AuthResponse buildAuthResponse(User user) {
         String accessToken        = jwtService.generateAccessToken(user);

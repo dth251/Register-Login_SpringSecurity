@@ -34,12 +34,6 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    /**
-     * Quan hệ ManyToMany với Role.
-     * Bảng trung gian: user_roles (user_id, role_id).
-     * FetchType.EAGER để load roles ngay khi load User
-     * (cần thiết vì Spring Security gọi getAuthorities() ngoài transaction).
-     */
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",

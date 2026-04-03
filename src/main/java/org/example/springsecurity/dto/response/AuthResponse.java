@@ -16,9 +16,6 @@ public class AuthResponse {
     private String tokenType;
     private String username;
     private String email;
-    /**
-     * Danh sách roles ngăn cách bởi dấu phẩy, VD: "ROLE_USER, ROLE_ADMIN"
-     */
     private String roles;
     private long expiresIn; // ms
 }
